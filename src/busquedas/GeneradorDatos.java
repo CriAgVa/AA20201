@@ -37,7 +37,31 @@ public class GeneradorDatos {
         arreglo[arreglo.length-1] = x;
        return arreglo;
     }
+    
+    public static int[] generarArregloIntMejorCaso(int x, int dim, int bound){
+        int[] arreglo = new int[dim];
+        
+        arreglo[0] = x;   
+        for(int y=1; y < dim; y++){
+            int j = generarNumeroAleatorioControlado(x, bound);
+            arreglo[y] = j;
+        }
+        
+       return arreglo;
+    }
    
+    // caso medio / unico elemento
+    public static int[] generarArregloIntCasoMedio(int x, int dim, int bound){
+        int[] arreglo = new int[dim];
+              
+        for(int y=0; y < dim; y++){
+            int j = generarNumeroAleatorioControlado(x, bound);
+            arreglo[y] = j;
+        }
+        arreglo[arreglo.length/2] = x;
+       return arreglo;
+    }
+    
     // genera numeros aleatorio en base a un valor x que no queremos que genere
     public static int generarNumeroAleatorioControlado (int x, int bound){
         Random ran = new Random();

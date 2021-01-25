@@ -9,38 +9,48 @@ import aa20201.data.Grafica;
 import busquedas.BusquedaSecuencial;
 import busquedas.Busquedas;
 import busquedas.GeneradorDatos;
+import fibonacci.FibonacciIterativo;
+import fibonacci.FibonacciIterativoDinamico;
+import fibonacci.FibonacciRecursivo;
+import fibonacci.FibonacciRecursivoDinamico;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import ordenamiento.Burbuja;
-
+import ordenamiento.BurbujaOptimizada;
+import ordenamiento.InsertionSort;
+import ordenamiento.MergeSort;
+import ordenamiento.QuickSort;
+import tsp.Ciudad;
+import tsp.MatrizAleatoria;
+import tsp.TSP;
 /**
  *
  * @author working
  */
 public class AA20201 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        int n = 4;
+        int limite = 1000;
+        double matriz[][] = new double[n][n];
+        BurbujaOptimizada bO = new BurbujaOptimizada();
+        ArrayList<Ciudad> a = new ArrayList();  
+        MatrizAleatoria mA = new MatrizAleatoria(n, limite);
         
-        int n = 20;
-        int[] aux;
-        double[] tiempos = new double[n];
-        Burbuja b = new Burbuja();
-        // complejidad algoritmica Sumatoria ( Generar los datos aleatorios + busqueda + almacenar el tiempo)
-        for (int j = 0; j < n; j++){
-            aux = GeneradorDatos.generarArregloInt(j,1000);
-            b.ordenar(aux);
-            tiempos[j] = (int) b.gettTotal();
-            //System.out.println("j= "+j+" :"+tiempos[j]);
-        }  
-        System.out.println();
-        Grafica g1 = new Grafica("N","Tiempo","Tiempos");
-        g1.agregarSerie("t1",tiempos);
-        g1.crearGrafica();
-        g1.muestraGrafica();
-       
-       
+        matriz = mA.generarMatriz();
+        
+        TSP tsp = new TSP(matriz, 1);
+        
+        tsp.limpiarMatriz(n, matriz, a);
+        
+        int ruta[];
+        ruta = tsp.generarMejorRuta(n, matriz, bO, a);
+        
+        for (int i = 0; i < ruta.length; i++) {
+            System.out.println(ruta[i]);
+            
+        }
     }
     
 }
